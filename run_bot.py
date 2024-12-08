@@ -176,17 +176,17 @@ async def on_message(event):
         except IndexError:
             await event.message.respond("Please provide a machine name, e.g., `?status MachineName`.")
 
-    if content.startswith("?help"):
-        try:
-            await event.message.respond("**?status MachineName** -- shows status for that machine\n**?machines** -- shows list of machines")
-        except:
-            print("error sending help command???")
+    # if content.startswith("?help"):
+        # try:
+            # await event.message.respond("**?status MachineName** -- shows status for that machine\n**?machines** -- shows list of machines")
+        # except:
+            # print("error sending help command??? how tf")
 
     if content.startswith("?machines"):
         try:
             await event.message.respond(MACHINE_NAME)                
         except IndexError:
-            await event.message.respond("Error with machine name (if this errors let me know)")
+            await event.message.respond("Something went wrong... is the MACHINE_NAME missing?")
 
 async def periodic_check():
     while True:
