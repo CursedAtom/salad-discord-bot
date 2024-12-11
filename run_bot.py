@@ -5,7 +5,7 @@ import asyncio
 from pathlib import Path
 
 # --------------------- FILL IN THESE FIELDS ---------------------- #
-bot = hikari.GatewayBot("YOUR-BOT-TOKEN") # You need to create a discord bot and copy the token ( https://discord.com/developers/applications )
+bot = hikari.GatewayBot("YOUR-TOKEN-HERE") # You need to create a discord bot and copy the token ( https://discord.com/developers/applications )
 user_id = 12345678987654321 # Replace with your Discord User ID ( https://www.youtube.com/watch?v=SNxNNpiRR1M )
 MACHINE_NAME = "MachineName" # Replace with your machine name (keep it reasonable, you'll need it later for the ?status command)
 # ----------------------------------------------------------------- #
