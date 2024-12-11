@@ -13,7 +13,7 @@ MACHINE_NAME = "MachineName" # Replace with your machine name (keep it reasonabl
 # Setup
 CHOPPING_REGEX = r'(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3} [+-]\d{2}:\d{2}) \[INF\] Connection id ".*?", Request id ".*?": the application completed without reading the entire request body\.' 
 DEGRADED_REGEX = r'(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3} [+-]\d{2}:\d{2}) \[WRN\] Node Compatibility Workload Failure (.*?) NodeCompatibilityMessage {(.*?)}'
-CHOPPING_STATE_REGEX = r'(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3} [+-]\d{2}:\d{2}) \[INF\] Running State: (\w+)'
+CHOPPING_STATE_REGEX = r'(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3} [+-]\d{2}:\d{2}) \[INF\] Node Workload State: "(.*?)"'
 BALANCE_REGEX = r'(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3} [+-]\d{2}:\d{2}) \[INF\] Wallet: Current\(([\d.]+)\), Predicted\(([-\d.]+)\)'
 log_dir = Path("C:/ProgramData/Salad/logs")
 
@@ -99,13 +99,6 @@ async def get_status(truncate):
                 running_match = re.findall(CHOPPING_STATE_REGEX, content)
                 if running_match:
                     timestamp, state = running_match[-1]  # Get the latest match
-
-                    # Make response more user readable
-                    if state == "true":
-                        state = "Chopping"
-                    elif state == "false":
-                        state = "Not Chopping"
-
                     if not truncate:
                         most_recent_running_state = (
                             f"# Running State\n\n"
